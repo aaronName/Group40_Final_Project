@@ -1,0 +1,356 @@
+[
+  {
+    "id": "N01",
+    "category": "表單標示與名稱",
+    "state": "form-errors",
+    "selector": "[data-testid=\"name\"]",
+    "steps": [
+      "進入報名表單錯誤狀態",
+      "檢查姓名欄位可存取名稱；使用螢幕閱讀器定位輸入欄位"
+    ],
+    "expected": "姓名欄位的可存取名稱為「姓名」",
+    "mutated": "移除 aria-labelledby，保留視覺文字，但不提供其他名稱",
+    "wcag": [
+      "1.3.1",
+      "4.1.2"
+    ],
+    "adjudication": "檢查可存取樹中名稱是否為空；視覺可見文字不代表已建立程式關聯。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "N02",
+    "category": "表單標示與名稱",
+    "state": "list",
+    "selector": "[data-testid=\"save-event\"]",
+    "steps": [
+      "定位第一張卡片的收藏圖示按鈕",
+      "檢查可存取名稱；切換收藏狀態"
+    ],
+    "expected": "按鈕名稱為「收藏網頁設計活動」或「取消收藏網頁設計活動」",
+    "mutated": "移除 aria-label，SVG 仍為 aria-hidden，按鈕僅保留圖示",
+    "wcag": [
+      "4.1.2"
+    ],
+    "adjudication": "比對修正版與植入版名稱；aria-pressed 保留，不另植入狀態缺陷。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "N03",
+    "category": "表單標示與名稱",
+    "state": "form-errors",
+    "selector": "[data-testid=\"email\"]",
+    "steps": [
+      "定位電子郵件欄位",
+      "檢查 label 的 for 和 input 的 id；點選視覺標籤"
+    ],
+    "expected": "電子郵件標籤連到 email 欄位，點選標籤可聚焦",
+    "mutated": "label for 指向不存在的 email-missing；input 沒有其他名稱",
+    "wcag": [
+      "1.3.1",
+      "3.3.2",
+      "4.1.2"
+    ],
+    "adjudication": "確認未形成隱含標籤；同一缺陷的多條規則只計一個 ID。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "V01",
+    "category": "文字與視覺辨識",
+    "state": "list",
+    "selector": "[data-testid=\"intro\"]",
+    "steps": [
+      "檢查首頁主標題下方說明文字",
+      "量測文字 #AAAAAA 與純白 #FFFFFF 背景"
+    ],
+    "expected": "17px 一般文字對比至少 4.5:1",
+    "mutated": "一般介紹文字改用 #AAAAAA，背景明確設為白色",
+    "wcag": [
+      "1.4.3"
+    ],
+    "adjudication": "量測實際 computed color/background；不要只憑肉眼。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "V02",
+    "category": "文字與視覺辨識",
+    "state": "form-errors",
+    "selector": "[data-testid=\"email-hint\"]",
+    "steps": [
+      "檢查電子郵件下方提示",
+      "量測文字 #AAAAAA 與純白 #FFFFFF 背景"
+    ],
+    "expected": "13px 提示文字對比至少 4.5:1",
+    "mutated": "電子郵件提示改用 #AAAAAA 白底",
+    "wcag": [
+      "1.4.3"
+    ],
+    "adjudication": "量測提示本身；不要以輸入欄位文字取代。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "V03",
+    "category": "文字與視覺辨識",
+    "state": "form-errors",
+    "selector": "[data-testid=\"error-summary\"]",
+    "steps": [
+      "進入錯誤狀態",
+      "量測錯誤摘要的說明文字與白底對比"
+    ],
+    "expected": "14px 錯誤文字對比至少 4.5:1",
+    "mutated": "摘要文字改為 #E4A0A0 白底；其他欄位錯誤維持正常",
+    "wcag": [
+      "1.4.3"
+    ],
+    "adjudication": "摘要粗體與段落分開量測；兩者均非大字門檻。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "O01",
+    "category": "焦點順序",
+    "state": "form-errors",
+    "selector": "[data-testid=\"email\"]",
+    "steps": [
+      "重新載入頁面並從文件起點按 Tab",
+      "追蹤姓名與信箱及導覽的順序"
+    ],
+    "expected": "由頁首、姓名、電子郵件到同意欄位及確認，順序維持內容理解",
+    "mutated": "電子郵件使用正值 tabindex=1，跳到姓名及頁首導覽之前",
+    "wcag": [
+      "2.4.3"
+    ],
+    "adjudication": "正值 tabindex 本身不等於必然違反；須記錄是否造成順序與理解中斷，未成立則排除主要分母。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "O02",
+    "category": "焦點順序",
+    "state": "detail",
+    "selector": "[data-testid=\"steps\"]",
+    "steps": [
+      "聚焦「查看完整活動流程」後按 Tab",
+      "依鍵盤取得的第一個步驟按 Enter",
+      "比對視覺排列的第 1、2、3 步及「尚未完成前一步」回饋"
+    ],
+    "expected": "焦點及可存取閱讀順序按第 1、2、3 步，符合前置依賴",
+    "mutated": "DOM 步驟反轉為 3、2、1；CSS 仍顯示 1、2、3，首先操作第 3 步會被拒絕",
+    "wcag": [
+      "2.4.3"
+    ],
+    "adjudication": "保留初次 Tab 順序與拒絕訊息的證據，以任務中斷而非 DOM 差異本身判斷。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "O03",
+    "category": "焦點順序",
+    "state": "form-errors",
+    "selector": ".form-ending",
+    "steps": [
+      "填好姓名和有效信箱",
+      "從電子郵件按 Tab 並記錄先聚焦的控制項",
+      "按 Enter，觀察未同意時被退回勾選欄位"
+    ],
+    "expected": "依畫面先勾選同意，再到確認按鈕",
+    "mutated": "確認按鈕在 DOM 位於同意欄位之前，CSS 將同意欄位顯示在上方",
+    "wcag": [
+      "2.4.3"
+    ],
+    "adjudication": "需判斷是否影響操作意義；只有視覺與 DOM 次序不同仍不足確認，裁決不成立即排除。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "K01",
+    "category": "鍵盤操作",
+    "state": "list",
+    "selector": "[data-testid=\"category-tech\"]",
+    "steps": [
+      "以 Tab 聚焦「科技與設計」",
+      "分別按 Enter 與 Space，觀察 aria-pressed 及卡片",
+      "以滑鼠點擊作對照"
+    ],
+    "expected": "Enter、Space 與滑鼠都能啟用篩選",
+    "mutated": "分類自訂按鈕僅綁定 onClick，沒有鍵盤啟動事件",
+    "wcag": [
+      "2.1.1"
+    ],
+    "adjudication": "確認兩種啟動鍵無效而滑鼠有效，不以角色存在推論功能可用。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "K02",
+    "category": "鍵盤操作",
+    "state": "detail",
+    "selector": "[data-testid=\"agenda-toggle\"]",
+    "steps": [
+      "聚焦「查看完整活動流程」",
+      "以 Enter、Space 嘗試展開",
+      "以滑鼠點擊作對照"
+    ],
+    "expected": "鍵盤或滑鼠都能切換展開狀態",
+    "mutated": "自訂展開控制項不處理 Enter/Space，仍可用滑鼠點擊",
+    "wcag": [
+      "2.1.1"
+    ],
+    "adjudication": "記錄 aria-expanded 與內容可見性前後變化。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "K03",
+    "category": "鍵盤操作",
+    "state": "detail",
+    "selector": "[data-testid=\"guide-region\"]",
+    "steps": [
+      "開啟場地導覽（滑鼠或 Enter）",
+      "依序嘗試 Tab、Shift+Tab、Escape",
+      "滑鼠點擊「關閉導覽」作對照"
+    ],
+    "expected": "Tab 可前往關閉按鈕，Escape 可關閉並返回啟動按鈕",
+    "mutated": "導覽區阻止 Tab、Shift+Tab、Escape；關閉按鈕 tabindex=-1，使鍵盤無法離開",
+    "wcag": [
+      "2.1.2"
+    ],
+    "adjudication": "實際測試完整區域且確認沒有可用鍵盤退出路徑；不要把單純不支援 Escape 就判為鍵盤陷阱。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "F01",
+    "category": "焦點管理與可見性",
+    "state": "detail",
+    "selector": "[data-testid=\"enroll\"]",
+    "steps": [
+      "使用 Tab 聚焦「前往報名」",
+      "比較前後截圖與 computed outline"
+    ],
+    "expected": "鍵盤聚焦有可辨識的外框",
+    "mutated": "只對該連結移除 outline 與 box-shadow，保留正常點擊功能",
+    "wcag": [
+      "2.4.7"
+    ],
+    "adjudication": "需以實際畫面確認沒有其他可見焦點指示；程式樣式檢查僅為輔助。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "F02",
+    "category": "焦點管理與可見性",
+    "state": "dialog",
+    "selector": "[data-testid=\"review\"]",
+    "steps": [
+      "從表單填妥資料並開啟確認對話框",
+      "記錄 document.activeElement 與焦點位置",
+      "按 Tab 觀察焦點是否仍在背景"
+    ],
+    "expected": "開啟後焦點進入對話框標題，背景不可聚焦",
+    "mutated": "開啟時仍聚焦背景確認按鈕；不對背景設 inert",
+    "wcag": [
+      "2.4.3"
+    ],
+    "adjudication": "記錄焦點在遮罩背後及後續操作影響；相關症狀歸同一 ID，避免重複計數。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "F03",
+    "category": "焦點管理與可見性",
+    "state": "dialog",
+    "selector": "[data-testid=\"confirm-dialog\"]",
+    "steps": [
+      "開啟確認對話框",
+      "按 Escape 或「返回修改」關閉",
+      "記錄 activeElement 並再按 Tab"
+    ],
+    "expected": "關閉後焦點回到「檢查並確認報名」",
+    "mutated": "關閉前 blur 目前焦點，移除對話框後焦點落回 body，未回啟動按鈕",
+    "wcag": [
+      "2.4.3"
+    ],
+    "adjudication": "確認焦點遺失及操作脈絡中斷；不可僅因未回觸發點就自動宣告所有情境違規。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "S01",
+    "category": "內容與回饋語意",
+    "state": "detail",
+    "selector": "[data-testid=\"venue-map\"]",
+    "steps": [
+      "查看場地示意圖中的北門、圖書館與無障礙入口",
+      "檢查替代文字並與圖像資訊對照"
+    ],
+    "expected": "替代文字說明從北門到圖書館二樓 201 教室及無障礙路線",
+    "mutated": "同一張資訊圖的 alt 改為「午餐菜單：咖哩飯與紅茶」",
+    "wcag": [
+      "1.1.1"
+    ],
+    "adjudication": "需人工對照圖意，非空 alt 不代表語意正確；不事先假設 axe 結果。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "S02",
+    "category": "內容與回饋語意",
+    "state": "detail",
+    "selector": "[data-testid=\"rules-link\"]",
+    "steps": [
+      "檢查「延伸資訊」下的獨立連結",
+      "依連結文字與可程式確定的上下文判斷目的",
+      "啟用連結確認實際目標為退費與取消辦法"
+    ],
+    "expected": "連結名稱清楚說明「閱讀活動退費與取消辦法」",
+    "mutated": "名稱改為「按此」，所在段落無其他目的說明",
+    "wcag": [
+      "2.4.4"
+    ],
+    "adjudication": "依連結及其程式關聯上下文裁決；不能只因使用「按此」三字就斷言必然違反。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  },
+  {
+    "id": "S03",
+    "category": "內容與回饋語意",
+    "state": "dialog",
+    "selector": "[data-testid=\"success\"]",
+    "steps": [
+      "開啟對話框後確認報名",
+      "觀察成功訊息出現且焦點回到啟動按鈕",
+      "使用固定螢幕閱讀器/瀏覽器抽查成功訊息是否自動宣告"
+    ],
+    "expected": "預先存在的 status/polite 區域在更新成功訊息時可宣告；不另搬動焦點",
+    "mutated": "成功訊息容器移除 role=status、aria-live 與 aria-atomic，仍顯示文字",
+    "wcag": [
+      "4.1.3"
+    ],
+    "adjudication": "DOM 屬性僅驗證植入；需另記錄螢幕閱讀器實際宣告、版本與設定，尚未實測不得填完成。",
+    "confirmed": null,
+    "evidence": [],
+    "exclusion_reason": null
+  }
+]
